@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Youth Gender Dysphoria Atlas | Manhattan Institute</title>
+  <meta name="description" content="Interactive maps and charts of gender dysphoria diagnoses among children, teens and young adults in Washington and Oregon, 2017–2023, from insurance claims.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="brandline">
+      <span class="mi">Manhattan Institute</span>
+      <nav>
+        <a href="#atlas">Map</a>
+        <a href="#trends">Trends</a>
+        <a href="#methods">Data &amp; methods</a>
+      </nav>
+    </div>
+    <h1>Youth Gender Dysphoria Atlas</h1>
+    <p class="dek">How many children, teens and young adults received a gender dysphoria diagnosis in their health-insurance claims, by sex, age and 3-digit ZIP area, 2017–2023.</p>
+  </div>
+</header>
+
+<div class="controls" role="region" aria-label="Filters">
+  <div class="wrap">
+    <div class="ctl">
+      <span class="lbl" id="l-state">State</span>
+      <div class="seg state" id="c-state" aria-labelledby="l-state"></div>
+    </div>
+    <div class="ctl">
+      <span class="lbl" id="l-measure">Measure</span>
+      <div class="seg" id="c-measure" aria-labelledby="l-measure"></div>
+    </div>
+    <div class="ctl">
+      <span class="lbl" id="l-sex">Sex</span>
+      <div class="seg" id="c-sex" aria-labelledby="l-sex"></div>
+    </div>
+    <div class="ctl">
+      <span class="lbl" id="l-band">Age</span>
+      <div class="seg" id="c-band" aria-labelledby="l-band"></div>
+    </div>
+    <div class="ctl">
+      <label for="c-period">Period</label>
+      <select id="c-period" class="yr"></select>
+    </div>
+  </div>
+</div>
+
+<main class="wrap">
+  <div class="counters" id="counters" aria-live="polite"></div>
+
+  <section class="block" id="atlas">
+    <h2 id="atlas-h">Where diagnoses are most common</h2>
+    <p class="sub">Each area is a 3-digit ZIP code region. Click an area, or a row in the ranking, to see its numbers and trend. The neighboring state is shown faded; click it to switch.</p>
+    <div class="atlas">
+      <div class="card">
+        <p class="map-title" id="map-title"></p>
+        <p class="map-sub" id="map-sub"></p>
+        <div id="map"><div class="loading">Loading map…</div></div>
+        <div class="legend" id="legend"></div>
+      </div>
+      <aside class="card panel" id="panel" aria-live="polite"></aside>
+    </div>
+
+    <div class="card" style="margin-top:18px">
+      <p class="map-title" id="rank-title"></p>
+      <p class="rank-key" id="rank-key"></p>
+      <div class="rank" id="rank"></div>
+      <details class="tbl">
+        <summary>Show the numbers as a table</summary>
+        <div class="tablewrap" id="zip-table"></div>
+      </details>
+    </div>
+  </section>
+
+  <section class="block" id="trends">
+    <h2 id="trend-h">Statewide trend, by sex and age</h2>
+    <p class="sub" id="trend-sub"></p>
+    <div class="card">
+      <div class="serieskey" id="trend-key"></div>
+      <div class="grid3" id="trend-charts"></div>
+      <p class="note" id="trend-note"></p>
+    </div>
+  </section>
+
+  <section class="block" id="byage">
+    <h2>Female vs. male, by age</h2>
+    <p class="sub" id="age-sub"></p>
+    <div class="card">
+      <div class="serieskey" id="age-key"></div>
+      <div class="chart" id="age-chart"></div>
+    </div>
+  </section>
+
+  <section class="block" id="methods">
+    <h2>Data &amp; methods</h2>
+    <p class="sub">Download the numbers behind every chart. Cells with fewer than 11 patients are withheld.</p>
+    <div class="downloads">
+      <a class="btn" href="downloads/GD_Youth_Atlas_Data.xlsx" download>Download Excel</a>
+      <a class="btn ghost" href="downloads/GD_Youth_Atlas_Data.csv" download>Download CSV</a>
+    </div>
+    <div class="methods">
+      <p><b>Source.</b> U.S. commercial and Medicaid medical insurance claims, 2017–2023, analyzed by the Manhattan Institute. The database does not cover every insurer, so these figures describe youth who appear in the claims data, not the full state population.</p>
+      <p><b>Diagnosis.</b> A youth is counted if at least one claim carries ICD-10 code F64.x (gender identity disorders), Z87.890 (personal history of sex reassignment) or E34.9 (endocrine disorder, unspecified), the “wide” definition used in our published charts.</p>
+      <p><b>Prevalence</b> is the share of youth with such a diagnosis in the period, per 100,000 youth of the same sex, age band and area in the claims data. <b>Cumulative 2017–2023</b> counts each young person once if diagnosed at any point in the seven years.</p>
+      <p><b>New diagnoses (incidence)</b> counts youth whose first recorded diagnosis falls in that year, per 100,000. The series starts in 2018 because 2017 cannot separate new from existing cases.</p>
+      <p><b>Sex</b> is the administrative gender marker on the claims (the one most often recorded for the person), not necessarily sex at birth. Fewer than 0.03% of youth have no marker.</p>
+      <p><b>Age bands</b> are approximate 5-year groupings: 8–12 (~7.5–12.5), 12–17 (~12.5–17.5) and 18–22 (~17.5–22.5).</p>
+      <p><b>Areas</b> are 3-digit ZIP prefixes from the patient’s address. Map shapes are Census ZIP Code Tabulation Areas grouped by prefix; uninhabited land with no ZIP code (forests, parks) is drawn as part of the nearest area, for display only. Washington 987 is not an assigned prefix; 994 (Clarkston) is served from Lewiston, Idaho.</p>
+      <p><b>Small numbers.</b> Any figure based on fewer than 11 patients is shown as “&lt;11” and its rate is withheld (hatched on the map). The combined figure is also withheld when either sex is.</p>
+      <p><b>2023 in Washington.</b> Washington claims thin out from August 2023, which understates 2023 prevalence; it is marked provisional (dashed line, open marker). The 2023 drop in new diagnoses was already visible in months with complete data.</p>
+      <p><b>National</b> lines are the same measure for the whole claims database, for comparison.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span><b>Manhattan Institute</b></span>
+    <span>Source: U.S. commercial and Medicaid medical claims, 2017–2023. Analysis: Manhattan Institute.</span>
+  </div>
+</footer>
+
+<div class="tip" id="tip" role="tooltip"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
+<script src="js/atlas.js"></script>
+</body>
+</html>
